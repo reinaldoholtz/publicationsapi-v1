@@ -1,0 +1,146 @@
+INSERT INTO publicacao (id, orgao, unidade, localidade, tipo, numero_processo, descricao, data_publicacao)
+VALUES 
+    ('001', 'Tribunal de Justiça', 'Unidade Administrativa', 'Brasília', 'Processo Judicial', '2024/12345', 'Os tribunais de justiça no Brasil têm uma função essencial no sistema judiciário, garantindo a aplicação da lei e a manutenção da ordem legal. A estrutura do Judiciário brasileiro é composta por diferentes níveis de tribunais, sendo o Supremo Tribunal Federal (STF) a mais alta instância, responsável por assegurar o cumprimento da Constituição Federal. Abaixo do STF, encontra-se o Superior Tribunal de Justiça (STJ), que trata da interpretação de leis federais e julga recursos especiais. Além disso, existem os Tribunais Regionais Federais (TRFs), responsáveis por julgar ações da União em suas respectivas regiões. A Justiça Estadual, composta pelos Tribunais de Justiça (TJs), abrange a maioria dos casos civis e criminais não federais. Cada estado brasileiro tem seu próprio Tribunal de Justiça, que atua como a principal instância judiciária em casos que envolvem o direito comum. Outras instâncias incluem a Justiça do Trabalho, Eleitoral e Militar, cada uma com competências específicas. Juntas, essas instituições compõem um sistema robusto e diversificado que visa garantir que todos os cidadãos tenham acesso à justiça de forma equitativa.', '2024-10-09 12:00:00'),
+
+    ('002', 'Tribunal de Justiça', 'Cível', 'São Paulo', 'Processo Judicial', '2024/12346', 'Os Tribunais de Justiça são responsáveis por julgar as ações que envolvem o direito civil, incluindo questões de família, contratos e propriedade. Cada TJ possui varas especializadas que tratam de casos específicos, como vara de família, vara de execuções fiscais e vara de pequenas causas. A Justiça Cível busca resolver conflitos de maneira pacífica e justa, promovendo a conciliação e a mediação sempre que possível.', '2024-10-10 12:00:00'),
+
+    ('003', 'Tribunal de Justiça', 'Criminal', 'Rio de Janeiro', 'Processo Judicial', '2024/12347', 'Os Tribunais de Justiça também atuam na área criminal, julgando crimes e contravenções penais. A Justiça Criminal é responsável por manter a ordem e a segurança pública, punindo comportamentos que atentam contra a sociedade. Além disso, os TJs têm competência para julgar recursos provenientes de decisões de primeira instância, garantindo o direito ao duplo grau de jurisdição.', '2024-10-11 12:00:00'),
+
+    ('004', 'Tribunal de Justiça', 'Trabalhista', 'Minas Gerais', 'Processo Judicial', '2024/12348', 'A Justiça do Trabalho é uma das instâncias que compõem o sistema judiciário brasileiro. Os Tribunais Regionais do Trabalho (TRTs) são responsáveis por julgar questões relacionadas a relações trabalhistas, como reivindicações de direitos dos trabalhadores, rescisões contratuais e acidentes de trabalho. Essa justiça busca equilibrar a relação entre empregador e empregado, assegurando os direitos trabalhistas.', '2024-10-12 12:00:00'),
+
+    ('005', 'Tribunal de Justiça', 'Eleitoral', 'Bahia', 'Processo Judicial', '2024/12349', 'O Tribunal Regional Eleitoral (TRE) é responsável por julgar questões relacionadas ao processo eleitoral. Cada estado possui um TRE, que organiza, supervisiona e julga as eleições, garantindo a legalidade e a justiça no pleito. O TRE também é responsável por registrar e julgar candidaturas e por manter a ordem nas eleições.', '2024-10-13 12:00:00'),
+
+    ('006', 'Tribunal de Justiça', 'Constitucional', 'Rio Grande do Sul', 'Processo Judicial', '2024/12350', 'O Supremo Tribunal Federal (STF) é a instância máxima do Judiciário brasileiro e atua como guardião da Constituição. O STF julga ações que questionam a constitucionalidade de leis e atos normativos, além de resolver conflitos entre a União e os Estados. A sua atuação é fundamental para a proteção dos direitos fundamentais e a manutenção da ordem constitucional.', '2024-10-14 12:00:00'),
+
+    ('007', 'Tribunal de Justiça', 'Militar', 'São Paulo', 'Processo Judicial', '2024/12351', 'O Superior Tribunal Militar (STM) é responsável por julgar os crimes militares definidos em lei. Essa justiça atua de maneira especializada, garantindo que os princípios do direito penal militar sejam respeitados. O STM também é responsável por julgar recursos de decisões de tribunais militares estaduais.', '2024-10-15 12:00:00'),
+
+    ('008', 'Tribunal de Justiça', 'Regional', 'Pernambuco', 'Processo Judicial', '2024/12352', 'Os Tribunais Regionais Federais (TRFs) são instâncias que julgam recursos provenientes das varas federais em suas respectivas regiões. Eles têm a função de uniformizar a interpretação das leis federais e garantir a justiça em casos que envolvem a União e suas entidades. A atuação dos TRFs é crucial para a eficácia do sistema judiciário federal.', '2024-10-16 12:00:00'),
+
+    ('009', 'Tribunal de Justiça', 'Infância e Juventude', 'Ceará', 'Processo Judicial', '2024/12353', 'Os Juizados da Infância e Juventude são responsáveis por julgar questões que envolvem crianças e adolescentes, incluindo casos de adoção, guarda e proteção. Esses juizados têm um papel fundamental na defesa dos direitos dos menores, assegurando que as decisões tomadas priorizem o melhor interesse da criança.', '2024-10-17 12:00:00'),
+
+    ('010', 'Tribunal de Justiça', 'Recursos', 'Paraná', 'Processo Judicial', '2024/12354', 'Os tribunais também são responsáveis por analisar recursos de decisões de instâncias inferiores. Isso garante que as partes tenham a oportunidade de contestar decisões que considerem injustas. O direito ao recurso é uma garantia fundamental no sistema judiciário, assegurando a possibilidade de revisão das decisões.', '2024-10-18 12:00:00');
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Para preparar a tabela de publicacao para usar o Full Text:
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Passo 1. Criar um novo text search configuration:
+- Vamos criar uma configuração chamada "publication" no schema public, que é o padrão do Postgres.
+Script:
+------
+Comando 1 : executado mas nao existem: (portuguese_stem, dict_simple_ptbr, dict_ispell_ptbr, dict_snowball_ptbr)
+-------------------------------------
+DROP TEXT SEARCH CONFIGURATION IF EXISTS publication CASCADE;
+CREATE TEXT SEARCH CONFIGURATION publication (COPY=pg_catalog.portuguese);
+ALTER TEXT SEARCH CONFIGURATION publication ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_part
+    WITH unaccent, dict_thesaurus_ptbr, portuguese_stem, dict_simple_ptbr, dict_ispell_ptbr, dict_snowball_ptbr;
+	
+comando 2: Executado com SUCESSO
+--------------------------------
+DROP TEXT SEARCH CONFIGURATION IF EXISTS publication CASCADE;
+CREATE TEXT SEARCH CONFIGURATION publication (COPY=pg_catalog.portuguese);
+ALTER TEXT SEARCH CONFIGURATION publication ALTER MAPPING FOR asciiword, asciihword, hword_asciipart, word, hword, hword_part
+    WITH unaccent, portuguese_stem;
+	
+O comando acima faz o seguinte:
+
+- Remove a configuração se existir;
+- Cria uma nova configuração copiando a configuração de texto padrão do idioma português;
+- Altera configuração adicionando parsers que identificam o tipo do token;
+- Adiciona os dicionários na ordem começando pelo unaccent e terminando no dict_snowball_ptbr.	
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Passo 2. Criando tabela e funções
+ - criar a tabela "publicacao" com um índice GIN para armazenar as publicações.
+
+Script:
+------ 
+- Este script nao precisa ser executado porque o BACKEND cria automaticamente a tabela abaixo:
+CREATE TABLE publicacao (
+    id character varying,
+    descricao TEXT,
+    localidade character varying,
+    numero_processo character varying,
+    orgao character varying,
+	tipo character varying,
+	data_publicacao timestamp,
+	documento TSVECTOR
+);
+
+- Este comando foi executado para criar o INDICE: Executado com SUCESSO
+CREATE INDEX idx_publicacao_documento ON publicacao USING GIN(documento);
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Passo 3: 
+- A busca textual é feita no campo do tipo TSVECTOR, entao deve criar uma trigger que atualiza o campo "documento" 
+com a junção do conteúdo dos campos que fazem sentido para a busca.
+- Uma trigger é uma função executada quando algum evento ocorre. Nesse caso, quando ocorrer um evento de INSERT ou UPDATE na tabela "publicacao".
+Já a extensão unaccent do Postgres permite remover acentos das palavras.
+- 
+
+Script: Executado com SUCESSO
+------
+CREATE EXTENSION IF NOT EXISTS "unaccent";
+CREATE OR REPLACE FUNCTION update_publicacao_documento() RETURNS trigger AS 
+$$
+BEGIN
+  new.documento := 
+    setweight(to_tsvector('public.publication', unaccent(coalesce(new.descricao, ''))), 'A') ||
+    setweight(to_tsvector('public.publication', unaccent(coalesce(new.orgao, ''))), 'B') ||
+    setweight(to_tsvector('public.publication', unaccent(coalesce(new.unidade, ''))), 'C');
+  RETURN new;
+END
+$$ LANGUAGE plpgsql;
+DROP TRIGGER IF EXISTS tg_update_publicacao_documento ON publicacao;
+CREATE TRIGGER tg_update_publicacao_documento BEFORE INSERT OR UPDATE ON publicacao FOR EACH ROW EXECUTE PROCEDURE update_publicacao_documento();
+
+Obs: O que essa função update_publicacao_documento() faz? Ela atualiza o campo documento da tabela adicionando os tokens dos campos descricao, 
+orgao e unidade, atribuindo um peso que varia de A, mais importante, até D, menos importante.
+Isso significa que o termo buscado vai levar em consideração, primeiro, se ele existe em descricao, depois em orgao e por fim em unidade.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Passo 4:
+- Toda busca textual é feita comparando TSVECTOR com TSQUERY. O termo utilizado para busca deve ser convertido usando a função nativa to_tsquery ou plainto_tsquery. 
+Essa segunda função é usada quando se deseja buscar por todas as palavras fornecidas. Então criei uma função que remove os espaços do termo a ser buscado e retorna um TSQUERY.
+
+Script: Executado com SUCESSO
+------
+CREATE OR REPLACE FUNCTION publicacao_tsquery(word text) RETURNS tsquery AS 
+$$
+BEGIN
+  RETURN plainto_tsquery('public.publication', unaccent(trim(word)));
+END
+$$ LANGUAGE plpgsql;
+--------------------------------------------------------------------------------------------------------------------------------------------------
+Passo 5: Criar registros na tabela "publicacao"
+Obs: Ao incluir os registros abaixo a coluna "documento" será populada pela trigge "update_publicacao_documento"r 
+
+Script: Executado com SUCESSO
+-------
+INSERT INTO publicacao (id, orgao, unidade, localidade, tipo, numero_processo, descricao, data_publicacao)
+VALUES 
+    ('001', 'Tribunal de Justiça Brasília', 'Unidade Administrativa', 'Brasília', 'Processo Judicial', '2024/12345', 'Os tribunais de justiça no Brasil têm uma função essencial no sistema judiciário, garantindo a aplicação da lei e a manutenção da ordem legal. A estrutura do Judiciário brasileiro é composta por diferentes níveis de tribunais, sendo o Supremo Tribunal Federal (STF) a mais alta instância, responsável por assegurar o cumprimento da Constituição Federal. Abaixo do STF, encontra-se o Superior Tribunal de Justiça (STJ), que trata da interpretação de leis federais e julga recursos especiais. Além disso, existem os Tribunais Regionais Federais (TRFs), responsáveis por julgar ações da União em suas respectivas regiões. A Justiça Estadual, composta pelos Tribunais de Justiça (TJs), abrange a maioria dos casos civis e criminais não federais. Cada estado brasileiro tem seu próprio Tribunal de Justiça, que atua como a principal instância judiciária em casos que envolvem o direito comum. Outras instâncias incluem a Justiça do Trabalho, Eleitoral e Militar, cada uma com competências específicas. Juntas, essas instituições compõem um sistema robusto e diversificado que visa garantir que todos os cidadãos tenham acesso à justiça de forma equitativa.', '2024-10-09 12:00:00'),
+
+    ('002', 'Tribunal de Justiça São Paulo', 'Cível', 'São Paulo', 'Processo Judicial', '2024/12346', 'Os Tribunais de Justiça são responsáveis por julgar as ações que envolvem o direito civil, incluindo questões de família, contratos e propriedade. Cada TJ possui varas especializadas que tratam de casos específicos, como vara de família, vara de execuções fiscais e vara de pequenas causas. A Justiça Cível busca resolver conflitos de maneira pacífica e justa, promovendo a conciliação e a mediação sempre que possível.', '2024-10-10 12:00:00'),
+
+    ('003', 'Tribunal de Justiça Rio de Janeiro', 'Criminal', 'Rio de Janeiro', 'Processo Judicial', '2024/12347', 'Os Tribunais de Justiça também atuam na área criminal, julgando crimes e contravenções penais. A Justiça Criminal é responsável por manter a ordem e a segurança pública, punindo comportamentos que atentam contra a sociedade. Além disso, os TJs têm competência para julgar recursos provenientes de decisões de primeira instância, garantindo o direito ao duplo grau de jurisdição.', '2024-10-11 12:00:00'),
+
+    ('004', 'Tribunal de Justiça Minas Gerais', 'Trabalhista', 'Minas Gerais', 'Processo Judicial', '2024/12348', 'A Justiça do Trabalho é uma das instâncias que compõem o sistema judiciário brasileiro. Os Tribunais Regionais do Trabalho (TRTs) são responsáveis por julgar questões relacionadas a relações trabalhistas, como reivindicações de direitos dos trabalhadores, rescisões contratuais e acidentes de trabalho. Essa justiça busca equilibrar a relação entre empregador e empregado, assegurando os direitos trabalhistas.', '2024-10-12 12:00:00'),
+
+    ('005', 'Tribunal de Justiça Bahia', 'Eleitoral', 'Bahia', 'Processo Judicial', '2024/12349', 'O Tribunal Regional Eleitoral (TRE) é responsável por julgar questões relacionadas ao processo eleitoral. Cada estado possui um TRE, que organiza, supervisiona e julga as eleições, garantindo a legalidade e a justiça no pleito. O TRE também é responsável por registrar e julgar candidaturas e por manter a ordem nas eleições.', '2024-10-13 12:00:00'),
+
+    ('006', 'Tribunal de Justiça Rio Grande do Sul', 'Constitucional', 'Rio Grande do Sul', 'Processo Judicial', '2024/12350', 'O Supremo Tribunal Federal (STF) é a instância máxima do Judiciário brasileiro e atua como guardião da Constituição. O STF julga ações que questionam a constitucionalidade de leis e atos normativos, além de resolver conflitos entre a União e os Estados. A sua atuação é fundamental para a proteção dos direitos fundamentais e a manutenção da ordem constitucional.', '2024-10-14 12:00:00'),
+
+    ('007', 'Tribunal de Justiça São Paulo', 'Militar', 'São Paulo', 'Processo Judicial', '2024/12351', 'O Superior Tribunal Militar (STM) é responsável por julgar os crimes militares definidos em lei. Essa justiça atua de maneira especializada, garantindo que os princípios do direito penal militar sejam respeitados. O STM também é responsável por julgar recursos de decisões de tribunais militares estaduais.', '2024-10-15 12:00:00'),
+
+    ('008', 'Tribunal de Justiça Pernambuco', 'Regional', 'Pernambuco', 'Processo Judicial', '2024/12352', 'Os Tribunais Regionais Federais (TRFs) são instâncias que julgam recursos provenientes das varas federais em suas respectivas regiões. Eles têm a função de uniformizar a interpretação das leis federais e garantir a justiça em casos que envolvem a União e suas entidades. A atuação dos TRFs é crucial para a eficácia do sistema judiciário federal.', '2024-10-16 12:00:00'),
+
+    ('009', 'Tribunal de Justiça Ceará', 'Infância e Juventude', 'Ceará', 'Processo Judicial', '2024/12353', 'Os Juizados da Infância e Juventude são responsáveis por julgar questões que envolvem crianças e adolescentes, incluindo casos de adoção, guarda e proteção. Esses juizados têm um papel fundamental na defesa dos direitos dos menores, assegurando que as decisões tomadas priorizem o melhor interesse da criança.', '2024-10-17 12:00:00'),
+
+    ('010', 'Tribunal de Justiça Paraná', 'Recursos', 'Paraná', 'Processo Judicial', '2024/12354', 'Os tribunais também são responsáveis por analisar recursos de decisões de instâncias inferiores. Isso garante que as partes tenham a oportunidade de contestar decisões que considerem injustas. O direito ao recurso é uma garantia fundamental no sistema judiciário, assegurando a possibilidade de revisão das decisões.', '2024-10-18 12:00:00');
+
+
+Passo 6: TESTES com Select
+
+-- busca ignorando acentuação
+SELECT * FROM publicacao WHERE documento @@ publicacao_tsquery('inovacao');
+-- busca por sinônimo
+SELECT * FROM publicacao WHERE documento @@ publicacao_tsquery('capassete');
+-- busca por sinônimo usando frase
+SELECT * FROM publicacao WHERE documento @@ publicacao_tsquery('protetor de cabeça');
